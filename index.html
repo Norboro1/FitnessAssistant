@@ -4,23 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation-prototype.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/foundation-sites/dist/css/foundation-flex.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/foundation-sites/dist/css/foundation.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Work Day Scheduler</title>
   </head>
 
   <body>
-    <div class="top-bar" id="example-menu">
-        <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">Site Title</li>
-          </ul>
+    <header>
+        <h1>FiTracker</h2>
+    </header>
+
+    <main>
+        <div class="row align-center padding-vertical-2">
+            <h2 id="today"></h2>
         </div>
-      </div>
+        <div class="row align-center">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="200" class="table-top-left">Sunday</th>
+                        <th width="200">Monday</th>
+                        <th width="200">Tuesday</th>
+                        <th width="200">Wednesday</th>
+                        <th width="200">Thursday</th>
+                        <th width="200">Friday</th>
+                        <th width="200" class="table-top-right">Saturday</th>
+                    </tr>
+                </thead>
+                <tbody class="body">
+                    <tr>
+                        <td class="table-bottom-left tcol-1">test</td>
+                        <td class="tcol-2"></td>
+                        <td class="tcol-1"></td>
+                        <td class="tcol-2"></td>
+                        <td class="tcol-1"></td>
+                        <td class="tcol-2"></td>
+                        <td class="table-bottom-right tcol-1"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </main>
+
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites/dist/js/foundation.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>

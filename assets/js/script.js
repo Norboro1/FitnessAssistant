@@ -1,5 +1,11 @@
 const token = 'f56350323de774e7aaf1d605e1cb07985f350a92'
 $(document).foundation();
+
+var todayEl=$("#today");
+var today = dayjs();
+
+todayEl.text(today.format('dddd, MMM D'));
+
 //var imageEl = $("#image")
 
 /*fetch("https://wger.de/api/v2/exercise/?muscles=1")

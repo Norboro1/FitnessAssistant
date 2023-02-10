@@ -1,0 +1,65 @@
+
+
+header{
+    padding: 10px;
+    background-color: rgb(226, 125, 125);
+    color: white;
+}
+
+h1{
+    font-size: 2em;
+    font-family: 'Tomorrow', sans-serif;
+    font-weight: 900;
+}
+
+h2{
+    font-size: 2em;
+    font-family: 'Tomorrow', sans-serif;
+    font-weight: 700;
+}
+
+table thead th{
+    border: 1px solid black;
+    text-align: center;
+}
+
+table {
+    border-collapse:separate;
+    border-spacing: 0px;
+}
+
+.table-top-left{
+    border-top-left-radius: 10px;
+}
+
+.table-top-right{
+    border-top-right-radius: 10px;
+}
+
+.table-bottom-left{
+    border-left: 1px solid black;
+    border-bottom-left-radius: 10px;
+}
+
+.table-bottom-right{
+    border-right: 1px solid black;
+    border-bottom-right-radius: 10px;
+}
+
+.tcol-1{
+    background-color: rgb(226, 125, 125);
+}
+
+.tcol-2{
+    background-color: rgb(219, 157, 157);
+}
+
+.body{
+    border: 1px solid black;
+}
+
+table tbody td{
+    height: 5em;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
