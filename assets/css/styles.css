@@ -6,6 +6,10 @@ header{
     color: white;
 }
 
+main{
+    text-align: center;
+}
+
 h1{
     font-size: 2em;
     font-family: 'Tomorrow', sans-serif;
@@ -62,4 +66,50 @@ table tbody td{
     height: 5em;
     text-align: center;
     border-bottom: 1px solid black;
+}
+
+.card {
+    text-align: start;
+}
+
+.card .card-divider{
+    background-color: rgb(226, 125, 125);
+    color: white;
+    justify-content: center;
+}
+
+.card-section p button {
+    margin-left: 10px;
+    color: blue;
+    float: right;
+}
+
+.small-2{
+    min-width: 200px;
+}
+
+.button-card button, .button-card button:focus{
+    border-radius: 1rem;
+    background-color: rgb(226, 125, 125);
+    font-size: 100px!important;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+form .button, form .button:focus{
+    background-color: rgb(226, 125, 125);
+}
+
+.button-card button:hover, form .button:hover{
+    background-color: rgb(219, 157, 157);
+}
+
+.link-button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#youtubePlayer{
+    width:fit-content;
 }
