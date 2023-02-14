@@ -39,24 +39,34 @@
                             </div>
                             <div class="medium-8 cell">
                               <label>Exercise
-                                <input type="text" placeholder="Hammer Curls" id="exerciseName0" required>
+                                <input type="text" placeholder="Hammer Curls" id="exerciseName0" required />
                               </label>
                             </div>
                             <div class="medium-2 cell">
                               <label>Reps
-                                  <input type="text" placeholder="7-10" id="reps0" required>
+                                  <input type="text" placeholder="7-10" id="reps0" required />
                               </label>
                             </div>
                           </div>
                     </div>
                     <button class="button radius" id="addExcerciseButton">+</button>
+                    <button class="button radius" id="removeExerciseButton">-</button>
                   </div>
-                  <button class="button rounded expanded" id="saveWorkoutButton">Save</button>
+                  <button type='submit' class="button rounded expanded" id="saveWorkoutButton">Save</button>
                 </form>
                 
           </div>
           <div class="reveal radius" id="youtubePlayer" data-reveal>
             <div id="player"></div>
+          </div>
+          <div class="reveal radius" id="deleteWorkoutModal" data-reveal>
+            <div class="grid-x align-center">
+              <h2>Are you sure you want to delete this workout?</h2>
+            </div>
+            <div class="grid-x grid-margin-x align-center">
+              <button class="button alert cell large-4" id="finalDelete">Delete</button>
+              <button class="button secondary cell large-4" data-close>Cancel</button>
+            </div>
           </div>
         <div class="grid-container fluid">
             <div id="workoutCards" class="grid-x grid-margin-x">

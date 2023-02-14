@@ -21,6 +21,7 @@ var chestDay = {
 
 var workouts = JSON.parse(localStorage.getItem('workouts'));
 
+
 if(!workouts){
     workouts = [];
     workouts.push(chestDay);
@@ -32,10 +33,12 @@ var workoutCardsEl = $("#workoutCards");
 var addWorkoutButtonEl = $("#addWorkoutButton");
 var saveWorkoutButtonEl = $("#saveWorkoutButton");
 var addExerciseButtonEl = $("#addExcerciseButton");
-
-var youtubeLink = "https://www.youtube.com/watch?v=";
+var removeExerciseButtonEl = $("#removeExerciseButton");
+var finalDeleteButton = $("#finalDelete");
 
 var exerciseCount = 1;
+var deleteChoice;
+removeExerciseButtonEl.hide();
 
 // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
@@ -59,7 +62,6 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING && !done) {
-    setTimeout(stopVideo, 6000);
     done = true;
   }
 }
@@ -117,6 +119,9 @@ function loadWorkouts() {
             section.append(line);
         }
 
+        var deleteButton = $("<button class='button radius delete' data-open='deleteWorkoutModal'>").text("X")
+        header.append(deleteButton);
+
         card.append(header, section);
         workoutCardsEl.append(card);
     }
@@ -130,8 +135,6 @@ function loadWorkouts() {
     workoutCardsEl.append(buttonCard);
     
 }
-
-loadWorkouts();
 
 function handleClientLoad(){
     gapi.load("client");
@@ -159,11 +162,7 @@ workoutCardsEl.on('click', 'button', async function(){
               'onStateChange': onPlayerStateChange
             }
           });
-    }
-})
-
-addWorkoutButtonEl.click(function(){
-    console.log('Add workout button clicked');
+    } 
 })
 
 addExerciseButtonEl.click(function(event){
@@ -182,14 +181,14 @@ addExerciseButtonEl.click(function(event){
 
     var exerciseDiv = $("<div class='medium-8 cell'>");
     var exerciseLabel = $("<label>").text('Exercise');
-    var exerciseInput = $("<input type='text' placeholder='Hammer Curls' id='exerciseName"+exerciseCount+"' required>");
+    var exerciseInput = $("<input type='text' placeholder='Hammer Curls' id='exerciseName"+exerciseCount+"' required />");
 
     exerciseLabel.append(exerciseInput);
     exerciseDiv.append(exerciseLabel);
 
     var reps = $("<div class='medium-2 cell'>");
     var repsLabel = $("<label>").text('Reps');
-    var repsInput = $("<input type='text' placeholder='7-10' id='reps"+exerciseCount+"' required>");
+    var repsInput = $("<input type='text' placeholder='7-10' id='reps"+exerciseCount+"' required />");
 
     repsLabel.append(repsInput);
     reps.append(repsLabel);
@@ -197,16 +196,31 @@ addExerciseButtonEl.click(function(event){
     $("#formExercises").append(excerciseLine);
 
     exerciseCount++;
+    if(exerciseCount == 2){
+        removeExerciseButtonEl.show();
+    }
     if(exerciseCount >= 8){
         addExerciseButtonEl.hide();
     }
+});
+
+removeExerciseButtonEl.click(function(event){
+    event.preventDefault();
+    console.log($(this).siblings(0).children().last());
+    $(this).siblings(0).children().last().remove();
+
+    exerciseCount--;
+    if(exerciseCount < 2){
+        removeExerciseButtonEl.hide();
+    }
 })
 
-saveWorkoutButtonEl.click(function(event){
-    event.preventDefault();
+//saveWorkoutButtonEl.click(function(event){
+$("#workoutForm").submit(function(event){
     for(i in workouts){
         if ($("#workoutName").val().toLowerCase() == workouts[i].name.toLowerCase()){
             window.alert('This workout name matches an existing workout. Please make it unique.');
+            event.preventDefault();
             return;
         }
     }
@@ -238,3 +252,22 @@ saveWorkoutButtonEl.click(function(event){
 $("#youtubePlayer").on('closed.zf.reveal', function(){
     stopVideo();
 })
+
+
+loadWorkouts();
+
+$(".delete").click(function(){
+    var thisWorkoutName = $(this).siblings('h4', 0).text();
+    console.log(thisWorkoutName);
+    deleteChoice = workouts.filter(function (el){
+        return el.name !== thisWorkoutName;
+    });
+
+    console.log(deleteChoice);
+});
+
+finalDeleteButton.click(function(){
+    workouts = deleteChoice;
+    localStorage.setItem('workouts', JSON.stringify(workouts));
+    location.reload();
+});
