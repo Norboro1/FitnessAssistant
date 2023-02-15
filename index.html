@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation-prototype.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/foundation-sites/dist/css/foundation-flex.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation-prototype.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@500;700;900&display=swap" rel="stylesheet">
@@ -15,10 +15,24 @@
 
   <body>
     <header>
-        <h1>FiTracker</h2>
+        <h1>FiTracker</h1>
     </header>
 
     <main>
+        <div class="reveal radius" id="workoutSelectorModal" data-reveal>
+            <h2 id="selectedDay"></h2>
+            <form id="scheduleForm">
+                <select id="workoutSelector">
+
+                </select>
+                <button type='submit' class="button rounded expanded" id="formSaveButton">Save</button>
+            </form>
+        </div>
+        <div class="reveal radius" id="workoutModal" data-reveal>
+        </div>
+        <div class="reveal radius" id="youtubePlayer" data-reveal>
+            <div id="player"></div>
+        </div>
         <div class="row align-center padding-vertical-2">
             <h2 id="today"></h2>
         </div>
@@ -36,17 +50,43 @@
                     </tr>
                 </thead>
                 <tbody class="body">
-                    <tr>
-                        <td class="table-bottom-left tcol-1">test</td>
-                        <td class="tcol-2"></td>
-                        <td class="tcol-1"></td>
-                        <td class="tcol-2"></td>
-                        <td class="tcol-1"></td>
-                        <td class="tcol-2"></td>
-                        <td class="table-bottom-right tcol-1"></td>
+                    <tr id="workoutSchedule">
+                        <td class="table-bottom-left tcol-1" id="day0" data-attr-day="Sunday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="tcol-2" id="day1" data-attr-day="Monday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="tcol-1" id="day2" data-attr-day="Tuesday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="tcol-2" id="day3" data-attr-day="Wednesday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="tcol-1" id="day4" data-attr-day="Thursday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="tcol-2" id="day5" data-attr-day="Friday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
+                        <td class="table-bottom-right tcol-1" id="day6" data-attr-day="Saturday">
+                            <button class="button secondary radius" data-open="workoutSelectorModal">+</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <button class="button alert radius" id="clearSchedule">Clear Workout Schedule</button>
+        <div class="grid-x align-center padding-top-3 padding-bottom-2">
+            <h2 class="grid-x align-middle">Your Workouts
+                <button class="button-svg" id="editWorkouts">
+                </button>
+            </h2>
+        </div>
+        <div class="grid-container width-100 bordered radius padding-1 workoutsContainerClass" id="workoutsContainer">
+            <div id="workoutCards" class="grid-x grid-margin-x workoutCardsClass">
+
+            </div>
         </div>
         
     </main>
@@ -54,6 +94,8 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites/dist/js/foundation.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
   </body>
 </html>

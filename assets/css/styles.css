@@ -1,12 +1,17 @@
-
+html, body {
+    height: 100vh;
+}
 
 header{
-    padding: 10px;
+    height: 8%;
+    display: flex;
+    padding: 12px;
     background-color: rgb(226, 125, 125);
     color: white;
 }
 
 main{
+    height: 92%;
     text-align: center;
 }
 
@@ -14,6 +19,10 @@ h1{
     font-size: 2em;
     font-family: 'Tomorrow', sans-serif;
     font-weight: 900;
+}
+
+h1 a, h1 a:hover{
+    color: white;
 }
 
 h2{
@@ -67,6 +76,13 @@ table tbody td{
     height: 5em;
     text-align: center;
     border-bottom: 1px solid black;
+    vertical-align: middle;
+}
+
+td button{
+    margin: 0!important;
+    font-size: 1.2rem!important;
+    font-weight: bold;
 }
 
 .card {
@@ -122,4 +138,50 @@ form .button, form .button:focus{
 
 #youtubePlayer{
     width:fit-content;
+}
+
+#workoutsContainer{
+    background-color: rgb(233, 233, 233);
+}
+
+button embed{
+    padding-left: 10px;
+    height: 1.2em;
+}
+
+.button-svg{
+    margin-left: 10px;
+    height: 1.2em;
+    width: 1.2em;
+    background-image: url(../images/icons8-edit-64.svg);
+    background-size: contain;
+}
+
+.button-svg:hover{
+    cursor: pointer;
+    filter: invert(31%) sepia(0%) saturate(4834%) hue-rotate(59deg) brightness(100%) contrast(70%);
+}
+
+.workoutCardsClass{
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+}
+
+.workoutsContainerClass{
+    max-height: 50%;
+    padding-bottom: 0!important;
+    overflow-y: auto;
+}
+
+.scheduleButton{
+    background-color: white;
+    color: black;
+}
+
+.scheduleButton:hover, .scheduleButton:focus{
+    background-color: rgb(153, 55, 55);
+}
+
+#clearSchedule {
+    margin: 0!important;
 }
