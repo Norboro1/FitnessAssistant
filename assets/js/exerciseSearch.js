@@ -15,6 +15,7 @@ function fetchExercises(muscle){
         }
     }).then(function(data){
         console.log(data);
+        cardContainerEl.empty();
         for(i in data){
             var card = $("<div class='card radius cell small-3' >");
             var cardHeader = $("<div class='card-divider'>");
