@@ -178,10 +178,6 @@ function loadWorkoutModal(nameChoice){
     workoutModalEl.append(card);
 }
 
-editWorkoutsButton.click(function(){
-    window.location = '../../FitnessAssistant/workouts.html';
-});
-
 workoutScheduleEl.on('click', 'button', function(){
     daySelected = $(this).parent().attr('data-attr-day')
     selectedDayEl.text(daySelected);
