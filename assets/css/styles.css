@@ -32,6 +32,13 @@ h2{
     text-align: center;
 }
 
+h3{
+    font-size: 1.5em;
+    font-family: 'Tomorrow', sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
 table thead th{
     border: 1px solid black;
     text-align: center;
@@ -184,4 +191,40 @@ button embed{
 
 #clearSchedule {
     margin: 0!important;
+}
+
+.custNavBar{
+    display: flex;
+    align-items: center;
+}
+
+.custNavBar .custA{
+    color: white;
+    margin-left: auto;
+    font-family: 'Tomorrow', sans-serif;
+    font-size: 1.4em;
+    margin-right: 20px;
+}
+
+.custNavBar .custA:hover{
+    text-decoration: underline;
+}
+
+.card .customDivider{
+    color:black;
+    font-size: 12px;
+    background-color: rgb(219, 157, 157)!important;
+}
+
+summary{
+    font-size: 16px;
+}
+
+.exerciseInfoButton{
+    margin: 0;
+    background-color: rgb(219, 157, 157);
+}
+
+.exerciseInfoButton:hover, .exerciseInfoButton:focus{
+    background-color: rgb(226, 125, 125);
 }
