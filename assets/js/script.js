@@ -179,7 +179,7 @@ function loadWorkoutModal(nameChoice){
 }
 
 editWorkoutsButton.click(function(){
-    window.location = '../.././workouts.html';
+    window.location = '../../FitnessAssistant/workouts.html';
 });
 
 workoutScheduleEl.on('click', 'button', function(){
