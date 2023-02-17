@@ -1,4 +1,6 @@
+//loads Foundation elements
 $(document).foundation();
+//declare API key, Example workout, and jquery variables for elements.
 var youtubeKey = 'AIzaSyBYb7dCrNGQqPVCzFFXT0zP84WvbHj-3_Q';
 var chestDay = {
     name: 'Chest Day',
@@ -19,6 +21,7 @@ var chestDay = {
 }]
 }
 
+//get workouts from local storage, or create array using example workout and save to local storage.
 var workouts = JSON.parse(localStorage.getItem('workouts'));
 
 
@@ -36,10 +39,13 @@ var addExerciseButtonEl = $("#addExcerciseButton");
 var removeExerciseButtonEl = $("#removeExerciseButton");
 var finalDeleteButton = $("#finalDelete");
 
+// Declare variables to keep track of amount of exercises on the form, and which workout the user has selected to delete.
 var exerciseCount = 1;
 var deleteChoice;
+//Hides the remove exercise button on add workout form by default so user cannot delete all exercises from the form
 removeExerciseButtonEl.hide();
 
+//Same Youtube IFrame Player API code from script.js, refer to comments there
 // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
 var tag = document.createElement('script');
@@ -69,6 +75,7 @@ function stopVideo() {
   player.stopVideo();
 }
 
+//Same Youtube Data API code from script.js, refer to comments there
 function loadClient() {
     gapi.client.setApiKey(youtubeKey);
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
@@ -99,6 +106,7 @@ return gapi.client.youtube.search.list({
          });
 }
 
+//function to load and render workouts to the page from workouts array, as well as render the Add Workout button.
 function loadWorkouts() {
 
     for(i in workouts){
@@ -141,6 +149,7 @@ function handleClientLoad(){
     loadClient();
 }
 
+//Same as event listener in script.js to load embedded youtube video from "Video" link button.
 workoutCardsEl.on('click', 'button', async function(){
     if($(this).attr('data-attr-workout')){
         var linkTest = await execute($(this).attr('data-attr-workout'));
@@ -165,6 +174,7 @@ workoutCardsEl.on('click', 'button', async function(){
     } 
 })
 
+//Event listener which loads and renders a new exercise line on the add workout form, up to 8 before hiding the button to do so.
 addExerciseButtonEl.click(function(event){
     event.preventDefault();
 
@@ -204,6 +214,7 @@ addExerciseButtonEl.click(function(event){
     }
 });
 
+//Event listener which removes the last exercise line from the add workout form down to 1 before the button is hidden.
 removeExerciseButtonEl.click(function(event){
     event.preventDefault();
     console.log($(this).siblings(0).children().last());
@@ -215,7 +226,8 @@ removeExerciseButtonEl.click(function(event){
     }
 })
 
-//saveWorkoutButtonEl.click(function(event){
+//Event listener on form submit to save input to workouts array and localstorage. Yes I used an alert incase the user enters a workout name that already exists
+//bite me, there are already so many Modals in this app Dx
 $("#workoutForm").submit(function(event){
     for(i in workouts){
         if ($("#workoutName").val().toLowerCase() == workouts[i].name.toLowerCase()){
@@ -249,11 +261,13 @@ $("#workoutForm").submit(function(event){
     location.reload();
 });
 
+//same as script.js, stops video on closing modal
 $("#youtubePlayer").on('closed.zf.reveal', function(){
     stopVideo();
 })
 
-
+//init and THEN event listener for delete buttons on workout cards which saves the workouts, filtered by the one they selected to delete, until they accept the modal prompt, 
+//choose a different workout to delete, or refresh the page.
 loadWorkouts();
 
 $(".delete").click(function(){

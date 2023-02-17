@@ -1,4 +1,6 @@
+//loads Foundation elements
 $(document).foundation();
+//declare API key, Example workout, and jquery variables for elements.
 var youtubeKey = 'AIzaSyBYb7dCrNGQqPVCzFFXT0zP84WvbHj-3_Q';
 var chestDay = {
     name: 'Chest Day',
@@ -31,6 +33,7 @@ var todayEl=$("#today");
 var today = dayjs();
 var daySelected;
 
+//get workouts and schedule from localstorage, if it doesn't exist, creates empty array or array with example workout, and sets to localstorage
 var workouts = JSON.parse(localStorage.getItem('workouts'));
 var schedule = JSON.parse(localStorage.getItem('schedule'));
 
@@ -47,6 +50,7 @@ if(!workouts){
 
 todayEl.text(today.format('dddd, MMM D'));
 
+//The following through line 78 is code from Youtube's IFrame player API that creates an embedded video player on the page.
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -74,6 +78,7 @@ function stopVideo() {
   player.stopVideo();
 }
 
+//This loads the gapi client necessary to use Youtube's Data API
 function loadClient() {
     gapi.client.setApiKey(youtubeKey);
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
@@ -82,6 +87,7 @@ function loadClient() {
             });
   }
 
+//Runs Youtube Data API Search function using parameter + " form" and returns the Video ID of the first result.
 function execute(workout) {
 return gapi.client.youtube.search.list({
     "part": [
@@ -109,6 +115,7 @@ function handleClientLoad(){
     loadClient();
 }
 
+//Function to load and render workouts onto the page from the workouts array.
 function loadWorkouts() {
 
     for(i in workouts){
@@ -135,6 +142,7 @@ function loadWorkouts() {
     }
 }
 
+//Function to load and render the schedule buttons based on the schedule array.
 function loadSchedule(){
     for(i=0; i<7; i++){
         var tableDay = $("#day"+i)
@@ -150,6 +158,7 @@ function loadSchedule(){
     }
 }
 
+//Function to render content in the Workout modal displaying workout info when user clicks it from the schedule.
 function loadWorkoutModal(nameChoice){
     workoutModalEl.empty();
 
@@ -178,6 +187,7 @@ function loadWorkoutModal(nameChoice){
     workoutModalEl.append(card);
 }
 
+//Event listener on the schedule that either pops up the Workout Selector Modal for the day selected or the workout modal if a workout was added to the schedule and clicked.
 workoutScheduleEl.on('click', 'button', function(){
     daySelected = $(this).parent().attr('data-attr-day')
     selectedDayEl.text(daySelected);
@@ -187,6 +197,7 @@ workoutScheduleEl.on('click', 'button', function(){
     }
 });
 
+//Event listener on submitting the schedule form that will add the day and workout selected to the schedule.
 scheduleFormEl.submit(function(event){
     var dayChoice = {
         day: daySelected,
@@ -203,12 +214,15 @@ scheduleFormEl.submit(function(event){
     localStorage.setItem('schedule', JSON.stringify(schedule));
 })
 
+//Event listener to clear the schedule and reload page
 clearScheduleButton.click(function(){
     schedule = [];
     localStorage.setItem('schedule', JSON.stringify(schedule));
     location.reload();
 })
 
+//Event listener for video links in the workout modal which uses Youtube API and the name of the exercise to then create and load an embedded video player
+//With the video ID obtained from the execute function. If there is already a player active it deletes it, to prevent bugs or doubling up.
 workoutModalEl.on('click', 'button', async function(){
     if($(this).attr('data-attr-workout')){
         var linkTest = await execute($(this).attr('data-attr-workout'));
@@ -233,10 +247,12 @@ workoutModalEl.on('click', 'button', async function(){
     } 
 })
 
+//Event listener for when the youtubePlayer modal is closed to stop playing the Video.
 $("#youtubePlayer").on('closed.zf.reveal', function(){
     stopVideo();
 })
 
+//initializes page
 loadWorkouts();
 loadSchedule();
 
