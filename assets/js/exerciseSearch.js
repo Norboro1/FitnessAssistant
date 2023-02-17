@@ -1,9 +1,11 @@
+//loads foundation elements
 $(document).foundation();
+//declare jquery variables for elements
 var searchButtonEl = $("#searchButton");
 var selectedMuscleEl = $("#selectedMuscle");
 var cardContainerEl = $("#cardContainer");
 
-
+//Function to fetch exercises from Exercises API based on muscle group using parameter, which then loads and renders the results as cards, and reloads foundation so cards work properly.
 function fetchExercises(muscle){
     fetch('https://api.api-ninjas.com/v1/exercises?muscle='+muscle,{
         method: 'GET',
@@ -52,6 +54,7 @@ function fetchExercises(muscle){
     });
 }
 
+//event listener which uses value from the Select input to run fetchExercises function
 searchButtonEl.click(function(event){
     event.preventDefault();
     fetchExercises(selectedMuscleEl.val());
